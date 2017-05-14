@@ -40,6 +40,14 @@ abstract class BoardingCard
     }
 
     /**
+     * @param string $departure
+     */
+    public function setDeparture(string $departure)
+    {
+        $this->departure = $departure;
+    }
+
+    /**
      * @return string
      */
     public function getDestination(): string
@@ -48,10 +56,26 @@ abstract class BoardingCard
     }
 
     /**
+     * @param string $destination
+     */
+    public function setDestination(string $destination)
+    {
+        $this->destination = $destination;
+    }
+
+    /**
      * @return string
      */
     public function getSeat(): string
     {
         return $this->seat;
+    }
+
+    /**
+     * @param string $seat
+     */
+    public function setSeat(string $seat)
+    {
+        $this->seat = $seat;
     }
 }

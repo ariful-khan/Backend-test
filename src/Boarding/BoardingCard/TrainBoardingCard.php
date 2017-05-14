@@ -24,6 +24,22 @@ class TrainBoardingCard extends BoardingCard
     /**
      * @return string
      */
+    public function getTrainCode(): string
+    {
+        return $this->trainCode;
+    }
+
+    /**
+     * @param string $trainCode
+     */
+    public function setTrainCode(string $trainCode)
+    {
+        $this->trainCode = $trainCode;
+    }
+
+    /**
+     * @return string
+     */
     public function toString(): string
     {
         return 'Take train ' . $this->trainCode . ' from ' . $this->getDestination() . ' to ' . $this->getDestination() . '. Sit in seat ' . $this->getSeat() . '.';
