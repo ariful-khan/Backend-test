@@ -1,0 +1,27 @@
+{
+    "name": "trivago/Hotels",
+    "description": "This is the trivago recruiting test.",
+    "authors": [
+        {
+            "name": "Mohammad Ariful Haque Khan",
+            "email": "neconest@gmail.com"
+        }
+    ],
+
+    "config": {
+        "bin-dir": "bin"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+
+    "require": {
+        "php": "^7.0",
+        "phpunit/phpunit": "5.7.*"
+    },
+
+    "minimum-stability": "dev"
+}
