@@ -19,13 +19,13 @@ class FakePassengerBoardingApi implements PassengerBoardingApiInterface
                     'destination' => 'Barcelona',
                     'seat' => '45B',
                     'type' => 'train',
-                    'TransportNumber' => '78A'
+                    'trainCode' => '78A'
                 ],
                 [
-                    'from' => 'Stockholm',
-                    'to' => 'New York JFK',
+                    'departure' => 'Stockholm',
+                    'destination' => 'New York JFK',
                     'seat' => '7B',
-                    'Gate' => '22',
+                    'gate' => '22',
                     'type' => 'flight',
                     'flight' => 'SK22',
                     'counter' => ''
@@ -40,7 +40,7 @@ class FakePassengerBoardingApi implements PassengerBoardingApiInterface
                     'departure' => 'Gerona Airport',
                     'destination' => 'Stockholm',
                     'seat' => '3A',
-                    'Gate' => '45B',
+                    'gate' => '45B',
                     'type' => 'flight',
                     'counter' => '344',
                     'flight' => '344'
