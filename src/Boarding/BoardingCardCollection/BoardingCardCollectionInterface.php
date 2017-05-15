@@ -10,5 +10,5 @@ interface BoardingCardCollectionInterface
 
     public function removeBoardingCard(BoardingCard $boardingCard);
 
-    public function getBoardingCards();
+    public function getBoardingCards(): array;
 }
