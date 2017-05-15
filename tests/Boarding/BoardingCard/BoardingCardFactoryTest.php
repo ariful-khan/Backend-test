@@ -40,7 +40,7 @@ class BoardingCardFactoryTest extends TestCase
         $train->departure = 'Dubai';
         $train->destination = 'Berlin';
         $train->seat = '9F';
-        $train->type = 'airport_bus';
+        $train->type = 'airport bus';
 
         $this->assertInstanceOf('Boarding\BoardingCard\AirportBusBoardingCard', BoardingCardFactory::build($train));
     }

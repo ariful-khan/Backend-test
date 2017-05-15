@@ -30,7 +30,7 @@ class BoardingCardFactory
                     $boardingData->trainCode
                 );
             default:
-                throw new \Exception('boarding card type not found', $boardingData->type);
+                throw new \Exception('boarding card type not found' . ' ' . $boardingData->type);
         }
     }
 }

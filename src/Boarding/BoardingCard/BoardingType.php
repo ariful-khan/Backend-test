@@ -6,5 +6,5 @@ abstract class BoardingType
 {
     const TRAIN = 'train';
     const FLIGHT = 'flight';
-    const AIRPORT_BUS = 'airport_bus';
+    const AIRPORT_BUS = 'airport bus';
 }
