@@ -8,10 +8,11 @@ use Test\Boarding\Fixture\PassengerBoardingCollectionFixture;
 
 use Boarding\BoardingCardSort\BoardingCardSort;
 use Boarding\BoardingCard\BoardingCard;
+use Boarding\BoardingCardCollection\BoardingCardCollection;
 
 class BoardingCardSortTest extends TestCase
 {
-    public function testSort()
+    public function testSortWithOnlyTwoBoardingCard()
     {
         $boardingCollection = PassengerBoardingCollectionFixture::getBoardingCollection();
 
@@ -34,5 +35,16 @@ class BoardingCardSortTest extends TestCase
         $this->assertEquals('Stockholm', $endPoint->getDeparture());
         $this->assertEquals('New York JFK', $endPoint->getDestination());
         $this->assertEquals('7B', $endPoint->getSeat());
+    }
+
+    public function testSortWithEmptyBoardingCollection()
+    {
+        $boardingCardCollection = new BoardingCardCollection();
+
+        $BoardingCardSort = new BoardingCardSort();
+        $boardingCollectionSorted = $BoardingCardSort->sort($boardingCardCollection);
+        $sortedBoardingCard = $boardingCollectionSorted->getBoardingCards();
+
+        $this->assertCount(0, $sortedBoardingCard);
     }
 }
