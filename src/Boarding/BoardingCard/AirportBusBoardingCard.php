@@ -13,6 +13,7 @@ class AirportBusBoardingCard extends BoardingCard
         $instruction = 'Take the airport bus from ' . $this->getDeparture() . ' to ' . $this->getDestination() . '. ';
         $seat = $this->getSeat() ? 'Sit in seat ' . $this->getSeat() . '.' : 'No seat assignment.';
         $instruction .= $seat;
+
         return $instruction;
     }
 }
