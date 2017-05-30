@@ -59,14 +59,14 @@ class TravelApp
      */
     private function getFormattedText(BoardingCardCollectionInterface $boardingCardCollectionSorted): string
     {
-        $steps = '';
+        $steps = "";
         $step = 1;
         foreach ($boardingCardCollectionSorted->getBoardingCards() as $boardingCard) {
-            $steps .= $step . '. ' . $boardingCard->toString() . "\n";
+            $steps .= "$step. $boardingCard->toString()\n";
             $step++;
         }
-        $steps .= "Baggage will we automatically transferred from your last leg. \n";
-        $steps .= $step . '. ' . "You have arrived at your final destination.  \n";
+        $steps .= "Baggage will we automatically transferred from your last leg.\n";
+        $steps .= "$step. You have arrived at your final destination.\n";
 
         return $steps;
     }
