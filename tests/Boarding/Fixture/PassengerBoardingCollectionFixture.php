@@ -63,4 +63,38 @@ class PassengerBoardingCollectionFixture
 
         return $boardingCardCollection;
     }
+
+    /**
+     * @return BoardingCardCollection
+     */
+    public static function getBoardingCollectionWithNoStartingPoint(): BoardingCardCollection
+    {
+        $boardingCardCollection = new BoardingCardCollection();
+
+        $boardingCardCollection->addBoardingCard(BoardingCardFactory::build
+        (
+            (object)[
+                'departure' => 'Madrid',
+                'destination' => 'Berlin',
+                'seat' => '45B',
+                'type' => 'train',
+                'trainCode' => '78A'
+            ]
+        ));
+
+        $boardingCardCollection->addBoardingCard(BoardingCardFactory::build
+        (
+            (object)[
+                'departure' => 'Dhaka',
+                'destination' => 'New York JFK',
+                'seat' => '7B',
+                'gate' => '22',
+                'type' => 'flight',
+                'flight' => 'SK22',
+                'counter' => ''
+            ]
+        ));
+
+        return $boardingCardCollection;
+    }
 }

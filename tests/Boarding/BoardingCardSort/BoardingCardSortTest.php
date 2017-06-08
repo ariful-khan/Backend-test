@@ -12,7 +12,7 @@ use Boarding\BoardingCardCollection\BoardingCardCollection;
 
 class BoardingCardSortTest extends TestCase
 {
-    public function testSortWithOnlyTwoBoardingCard()
+    public function testSortBoardingCard()
     {
         $boardingCollection = PassengerBoardingCollectionFixture::getBoardingCollection();
 
@@ -21,20 +21,39 @@ class BoardingCardSortTest extends TestCase
         $sortedBoardingCard = $boardingCollectionSorted->getBoardingCards();
 
         /**
-         * @var $startPoint BoardingCard
+         * @var $point BoardingCard
          */
-        $startPoint = $sortedBoardingCard[0];
-        $this->assertEquals('Madrid', $startPoint->getDeparture());
-        $this->assertEquals('Barcelona', $startPoint->getDestination());
-        $this->assertEquals('45B', $startPoint->getSeat());
+        $point = $sortedBoardingCard[0];
+        $this->assertEquals('Madrid', $point->getDeparture());
+        $this->assertEquals('Barcelona', $point->getDestination());
+        $this->assertEquals('45B', $point->getSeat());
 
-        /**
-         * @var $startPoint BoardingCard
-         */
-        $endPoint = $sortedBoardingCard[3];
-        $this->assertEquals('Stockholm', $endPoint->getDeparture());
-        $this->assertEquals('New York JFK', $endPoint->getDestination());
-        $this->assertEquals('7B', $endPoint->getSeat());
+        $point = $sortedBoardingCard[1];
+        $this->assertEquals('Barcelona', $point->getDeparture());
+        $this->assertEquals('Gerona Airport', $point->getDestination());
+        $this->assertEquals('', $point->getSeat());
+
+        $point = $sortedBoardingCard[2];
+        $this->assertEquals('Gerona Airport', $point->getDeparture());
+        $this->assertEquals('Stockholm', $point->getDestination());
+        $this->assertEquals('3A', $point->getSeat());
+
+        $point = $sortedBoardingCard[3];
+        $this->assertEquals('Stockholm', $point->getDeparture());
+        $this->assertEquals('New York JFK', $point->getDestination());
+        $this->assertEquals('7B', $point->getSeat());
+    }
+
+    public function testSortWithNoStarting()
+    {
+        $boardingCollection = PassengerBoardingCollectionFixture::getBoardingCollectionWithNoStartingPoint();
+
+        $BoardingCardSort = new BoardingCardSort();
+        $boardingCollectionSorted = $BoardingCardSort->sort($boardingCollection);
+        $sortedBoardingCard = $boardingCollectionSorted->getBoardingCards();
+
+        $this->assertCount(1, $sortedBoardingCard);
+        $this->assertInstanceOf('Boarding\BoardingCard\NullBoardingCard', $sortedBoardingCard[0]);
     }
 
     public function testSortWithEmptyBoardingCollection()
@@ -45,6 +64,7 @@ class BoardingCardSortTest extends TestCase
         $boardingCollectionSorted = $BoardingCardSort->sort($boardingCardCollection);
         $sortedBoardingCard = $boardingCollectionSorted->getBoardingCards();
 
-        $this->assertCount(0, $sortedBoardingCard);
+        $this->assertCount(1, $sortedBoardingCard);
+        $this->assertInstanceOf('Boarding\BoardingCard\NullBoardingCard', $sortedBoardingCard[0]);
     }
 }

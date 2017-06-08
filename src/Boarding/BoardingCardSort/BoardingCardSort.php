@@ -2,8 +2,12 @@
 
 namespace Boarding\BoardingCardSort;
 
-use Boarding\BoardingCardCollection\{BoardingCardCollectionInterface, BoardingCardCollection};
-use Boarding\BoardingCard\BoardingCard;
+use Boarding\BoardingCardCollection\{
+    BoardingCardCollectionInterface, BoardingCardCollection
+};
+use Boarding\BoardingCard\{
+    BoardingCard, NullBoardingCard
+};
 
 class BoardingCardSort implements BoardingCardSortInterface
 {
@@ -13,25 +17,11 @@ class BoardingCardSort implements BoardingCardSortInterface
      */
     public function sort(BoardingCardCollectionInterface $boardingCardCollection): BoardingCardCollectionInterface
     {
-        if ($this->isBoardingCardCollectionEmpty($boardingCardCollection)) {
-            return $boardingCardCollection;
-        }
-
         $departureIndex = $this->getDepartureIndex($boardingCardCollection);
         $destinationIndex = $this->getDestinationIndex($boardingCardCollection);
 
         $journeyStartsAt = $this->findWhereJourneyStarts($departureIndex, $destinationIndex);
-
         return $this->getSortedCards($departureIndex, $journeyStartsAt);
-    }
-
-    /**
-     * @param $boardingCardCollection
-     * @return bool
-     */
-    private function isBoardingCardCollectionEmpty($boardingCardCollection): bool
-    {
-        return (count($boardingCardCollection->getBoardingCards()) === 0);
     }
 
     /**
@@ -39,7 +29,7 @@ class BoardingCardSort implements BoardingCardSortInterface
      * @param $journeyStartsAt
      * @return BoardingCardCollectionInterface
      */
-    private function getSortedCards($departureIndex, $journeyStartsAt): BoardingCardCollectionInterface
+    private function getSortedCards(array $departureIndex, BoardingCard $journeyStartsAt): BoardingCardCollectionInterface
     {
         $sortedBoardingCards[] = $journeyStartsAt;
         $currentLocation = $journeyStartsAt->getDestination();
@@ -72,9 +62,13 @@ class BoardingCardSort implements BoardingCardSortInterface
      * @param array $destinationIndex
      * @return BoardingCard
      */
-    private function findWhereJourneyStarts(array $departureIndex = [], array $destinationIndex = []): BoardingCard
+    private function findWhereJourneyStarts(array $departureIndex, array $destinationIndex): BoardingCard
     {
         $firstDepartureLocation = array_diff(array_keys($departureIndex), array_keys($destinationIndex));
+
+        if (count($firstDepartureLocation) !== 1) {
+            return new NullBoardingCard();
+        }
 
         return $departureIndex[$firstDepartureLocation[0]];
     }
@@ -87,9 +81,7 @@ class BoardingCardSort implements BoardingCardSortInterface
     {
         $departureIndex = [];
         foreach ($boardingCardCollection->getBoardingCards() as $boardingCard) {
-            /**
-             * @var $boardingCard BoardingCard
-             */
+            /** @var $boardingCard BoardingCard */
             $departureIndex[$boardingCard->getDeparture()] = $boardingCard;
         }
 
@@ -104,9 +96,7 @@ class BoardingCardSort implements BoardingCardSortInterface
     {
         $destinationIndex = [];
         foreach ($boardingCardCollection->getBoardingCards() as $boardingCard) {
-            /**
-             * @var $boardingCard BoardingCard
-             */
+            /** @var $boardingCard BoardingCard */
             $destinationIndex[$boardingCard->getDestination()] = $boardingCard;
         }
 
